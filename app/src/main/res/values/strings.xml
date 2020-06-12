@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RMA App</string>
+    <string name="add_location">Add a Location</string>
+    <string name="upper_card_description_text">Save an important place that you\'re visiting!</string>
+    <string name="lower_card_title_text">Track History</string>
+    <string name="lower_card_description_text">Keep track of all the places you\'ve saved!</string>
 </resources>
