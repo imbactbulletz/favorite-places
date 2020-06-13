@@ -15,7 +15,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/addHistoryCard"
+        android:id="@+id/addLocationCard"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
@@ -34,7 +34,7 @@
             android:padding="24dp">
 
             <TextView
-                android:id="@+id/upperCardTitleText"
+                android:id="@+id/addLocationCardTitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/add_location"
@@ -43,15 +43,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/upperCardDescriptionText"
+                android:id="@+id/addLocationCardDescriptionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/upper_card_description_text"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/upperCardTitleText" />
+                app:layout_constraintStart_toStartOf="@id/addLocationCardTitleText"
+                app:layout_constraintTop_toBottomOf="@id/addLocationCardTitleText" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -61,11 +60,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/upperCardDescriptionText" />
+                app:layout_constraintTop_toBottomOf="@id/addLocationCardDescriptionText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/trackHistoryCard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
@@ -84,7 +84,7 @@
             android:padding="24dp">
 
             <TextView
-                android:id="@+id/lowerCardTitleText"
+                android:id="@+id/trackHistoryCardTitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/lower_card_title_text"
@@ -93,15 +93,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/lowerCardDescriptionText"
+                android:id="@+id/trackHistoryCardDescriptionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/lower_card_description_text"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lowerCardTitleText" />
+                app:layout_constraintStart_toStartOf="@id/trackHistoryCardTitleText"
+                app:layout_constraintTop_toBottomOf="@id/trackHistoryCardTitleText" />
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -110,7 +109,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lowerCardDescriptionText" />
+                app:layout_constraintTop_toBottomOf="@id/trackHistoryCardDescriptionText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
