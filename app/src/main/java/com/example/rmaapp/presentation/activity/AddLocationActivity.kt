@@ -61,6 +61,8 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
             val locationNote = locationNoteEditText.text.toString()
             viewModel.save(SavedLocation(locationTitle, locationNote))
         }
+
+        discardButton.setOnClickListener { showConfirmationDialog() }
     }
 
 
@@ -139,6 +141,14 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
             .show()
     }
 
+    private fun showConfirmationDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Discard entry")
+            .setMessage("Are you sure you want to discard this entry?")
+            .setPositiveButton("Yes") { _,_ -> finish() }
+            .setNegativeButton("No", null)
+            .show()
+    }
 
     private fun requestLocationPermission() {
         ActivityCompat.requestPermissions(
