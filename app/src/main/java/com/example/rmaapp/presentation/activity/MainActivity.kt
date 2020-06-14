@@ -17,8 +17,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun initCardListeners() {
         addLocationCard.setOnClickListener {
-            val intent = Intent(this, AddLocationActivity::class.java)
-            startActivity(intent)
+            launchActivity(AddLocationActivity::class.java)
         }
+
+        trackHistoryCard.setOnClickListener {
+            launchActivity(TrackHistoryActivity::class.java)
+        }
+    }
+
+    private fun launchActivity(clazz: Class<out AppCompatActivity>) {
+        val intent = Intent(this, clazz)
+        startActivity(intent)
     }
 }
