@@ -69,6 +69,7 @@
                 android:layout_margin="16dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <EditText
+                    android:id="@+id/locationNoteEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textMultiLine"
