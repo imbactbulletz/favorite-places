@@ -6,6 +6,7 @@ import com.example.rmaapp.presentation.model.SavedLocation
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_item_location.*
 import java.text.SimpleDateFormat
+import java.util.*
 
 class SavedLocationViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
@@ -21,7 +22,7 @@ class SavedLocationViewHolder(override val containerView: View) : RecyclerView.V
 
         locationTitleTextView.text = savedLocation.title
         locationNoteTextView.text = savedLocation.note
-        locationDateTakenTextView.text = SimpleDateFormat.getDateTimeInstance().format(savedLocation.dateCreated.time)
+        locationDateTakenTextView.text = SimpleDateFormat("dd.MM.yyyy. HH:mm", Locale.getDefault()).format(savedLocation.dateCreated)
     }
 
 }
