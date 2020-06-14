@@ -14,14 +14,14 @@
         android:theme="@style/AppTheme">
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCMZOCqoPpDzRxrgIZc5QkjClATjImlN28" />
 
-        <activity android:name=".activity.MainActivity">
+        <activity android:name="com.example.rmaapp.presentation.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AddLocationActivity" />
+        <activity android:name="com.example.rmaapp.presentation.activity.AddLocationActivity" />
     </application>
 
 </manifest>

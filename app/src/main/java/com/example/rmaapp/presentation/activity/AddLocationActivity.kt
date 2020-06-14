@@ -1,4 +1,4 @@
-package com.example.rmaapp.activity
+package com.example.rmaapp.presentation.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
