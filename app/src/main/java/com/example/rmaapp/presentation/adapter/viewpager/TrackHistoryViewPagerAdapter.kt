@@ -4,7 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.rmaapp.presentation.fragment.LocationListFragment
 import com.example.rmaapp.presentation.fragment.MapHistoryFragment
+import java.lang.NullPointerException
 
 class TrackHistoryViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
 
@@ -19,7 +21,8 @@ class TrackHistoryViewPagerAdapter(fragmentActivity: FragmentActivity): Fragment
     override fun createFragment(position: Int): Fragment {
         return when(position) {
             0 -> MapHistoryFragment()
-            else -> Fragment()
+            1 -> LocationListFragment()
+            else -> throw NullPointerException("No such fragment.")
         }
     }
 }
