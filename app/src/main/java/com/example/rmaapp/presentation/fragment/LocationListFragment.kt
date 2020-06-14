@@ -1,13 +1,16 @@
 package com.example.rmaapp.presentation.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rmaapp.R
+import com.example.rmaapp.presentation.activity.LocationInfoActivity
 import com.example.rmaapp.presentation.adapter.recycler.SavedLocationListAdapter
 import com.example.rmaapp.presentation.contract.LocationListContract
+import com.example.rmaapp.presentation.model.SavedLocation
 import com.example.rmaapp.presentation.viewmodel.LocationListFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_location_list.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -25,7 +28,7 @@ class LocationListFragment : Fragment(R.layout.fragment_location_list) {
     }
 
     private fun initRecyclerView() {
-        recyclerAdapter = SavedLocationListAdapter()
+        recyclerAdapter = SavedLocationListAdapter { startLocationInfoActivity(it) }
         locationRecyclerView.adapter = recyclerAdapter
         locationRecyclerView.layoutManager = LinearLayoutManager(activity)
     }
@@ -36,4 +39,9 @@ class LocationListFragment : Fragment(R.layout.fragment_location_list) {
         }
     }
 
+    private fun startLocationInfoActivity(savedLocation: SavedLocation) {
+        val intent = Intent(activity, LocationInfoActivity::class.java)
+        intent.putExtra(LocationInfoActivity.SAVED_LOCATION_KEY, savedLocation)
+        startActivity(intent)
+    }
 }

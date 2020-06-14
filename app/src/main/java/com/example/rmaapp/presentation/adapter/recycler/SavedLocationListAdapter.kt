@@ -1,14 +1,16 @@
 package com.example.rmaapp.presentation.adapter.recycler
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.rmaapp.R
+import com.example.rmaapp.presentation.activity.LocationInfoActivity
 import com.example.rmaapp.presentation.adapter.recycler.viewholder.SavedLocationViewHolder
 import com.example.rmaapp.presentation.model.SavedLocation
 
-class SavedLocationListAdapter: ListAdapter<SavedLocation, SavedLocationViewHolder>(
+class SavedLocationListAdapter(private val onSavedLocationClickedCallback: (SavedLocation) -> Unit): ListAdapter<SavedLocation, SavedLocationViewHolder>(
     SAVED_LOCATION_DIFF_UTIL_ITEM_CALLBACK) {
 
     companion object {
@@ -29,7 +31,9 @@ class SavedLocationListAdapter: ListAdapter<SavedLocation, SavedLocationViewHold
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SavedLocationViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_location, parent, false)
-        return SavedLocationViewHolder(view)
+        val viewHolder =  SavedLocationViewHolder(view)
+        viewHolder.onClickListener = onSavedLocationClickedCallback
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: SavedLocationViewHolder, position: Int) {
