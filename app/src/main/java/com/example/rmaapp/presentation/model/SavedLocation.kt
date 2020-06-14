@@ -1,3 +1,5 @@
 package com.example.rmaapp.presentation.model
 
-data class SavedLocation(val title: String, val note: String, val id: Int = 0)
+import java.util.*
+
+data class SavedLocation(val title: String, val note: String, val dateCreated: Date = Date(), val id: Int = 0)
