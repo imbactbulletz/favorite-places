@@ -35,7 +35,7 @@
             android:text="Note placeholder"
             android:maxLines="2"/>
         <TextView
-            android:id="@+id/datePlaceholder"
+            android:id="@+id/locationDateTakenTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
