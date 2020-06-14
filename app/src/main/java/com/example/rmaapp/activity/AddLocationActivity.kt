@@ -1,4 +1,4 @@
-package com.example.rmaapp
+package com.example.rmaapp.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -8,6 +8,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.rmaapp.R
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -46,14 +47,19 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
 
         LocationServices.getFusedLocationProviderClient(this).lastLocation.addOnSuccessListener { location ->
             val position = if (location != null) LatLng(location.latitude, location.longitude)
-                else LatLng(SYDNEY_LAT, SYDNEY_LON)
+                else LatLng(
+                SYDNEY_LAT,
+                SYDNEY_LON
+            )
 
             val marker = MarkerOptions()
                 .position(position)
 
             map?.clear()
             map?.addMarker(marker)
-            map?.animateCamera(CameraUpdateFactory.newLatLngZoom(position, ZOOM_FACTOR))
+            map?.animateCamera(CameraUpdateFactory.newLatLngZoom(position,
+                ZOOM_FACTOR
+            ))
         }
     }
 
