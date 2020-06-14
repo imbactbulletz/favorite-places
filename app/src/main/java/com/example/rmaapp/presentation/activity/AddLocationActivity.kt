@@ -59,12 +59,21 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
         saveButton.setOnClickListener {
             val locationTitle = locationTitleEditText.text.toString()
             val locationNote = locationNoteEditText.text.toString()
-            viewModel.save(SavedLocation(locationTitle, locationNote))
+
+            if (!locationTitle.isNullOrEmpty() && !locationNote.isNullOrEmpty()) {
+                viewModel.save(SavedLocation(locationTitle, locationNote))
+            } else {
+                if (locationTitle.isNullOrEmpty()) {
+                    locationTitleEditText.error = "Title cannot be empty"
+                }
+                if (locationNote.isNullOrEmpty()) {
+                    locationNoteEditText.error = "Note cannot be empty"
+                }
+            }
+
+            discardButton.setOnClickListener { showConfirmationDialog() }
         }
-
-        discardButton.setOnClickListener { showConfirmationDialog() }
     }
-
 
 
     private fun onLocationReceived(location: Location?) {
