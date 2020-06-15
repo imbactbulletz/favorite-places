@@ -10,6 +10,7 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.observe
 import com.example.rmaapp.R
 import com.example.rmaapp.presentation.contract.AddLocationContract
 import com.example.rmaapp.presentation.model.SavedLocation
@@ -27,7 +28,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_add_location.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import androidx.lifecycle.observe
 
 class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), OnMapReadyCallback {
 
@@ -78,8 +78,9 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
                 }
             }
 
-            discardButton.setOnClickListener { showConfirmationDialog() }
         }
+
+        discardButton.setOnClickListener { showConfirmationDialog() }
     }
 
 
@@ -96,9 +97,12 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
             .position(position)
         map?.clear()
         map?.addMarker(marker)
-        map?.animateCamera(CameraUpdateFactory.newLatLngZoom(position,
-            ZOOM_FACTOR
-        ))
+        map?.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                position,
+                ZOOM_FACTOR
+            )
+        )
     }
 
     @SuppressLint("MissingPermission")
@@ -106,14 +110,16 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
         val locationRequest = LocationRequest.create()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest.interval = REQUEST_INTERVAL
-        val locationCallback = object: LocationCallback() {
+        val locationCallback = object : LocationCallback() {
             override fun onLocationResult(result: LocationResult?) {
                 onLocationReceived(result?.lastLocation)
-                LocationServices.getFusedLocationProviderClient(this@AddLocationActivity).removeLocationUpdates(this)
+                LocationServices.getFusedLocationProviderClient(this@AddLocationActivity)
+                    .removeLocationUpdates(this)
             }
         }
 
-        LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+        LocationServices.getFusedLocationProviderClient(this)
+            .requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
     }
 
     override fun onRequestPermissionsResult(
@@ -162,7 +168,7 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
         MaterialAlertDialogBuilder(this)
             .setTitle("Discard entry")
             .setMessage("Are you sure you want to discard this entry?")
-            .setPositiveButton("Yes") { _,_ -> finish() }
+            .setPositiveButton("Yes") { _, _ -> finish() }
             .setNegativeButton("No", null)
             .show()
     }
@@ -187,7 +193,7 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
 
         when (isLocationPermissionGranted) {
             PackageManager.PERMISSION_GRANTED -> requestLocation()
-            PackageManager.PERMISSION_DENIED -> if(Build.VERSION.SDK_INT >= 23) requestLocationPermission()
+            PackageManager.PERMISSION_DENIED -> if (Build.VERSION.SDK_INT >= 23) requestLocationPermission()
         }
     }
 }
