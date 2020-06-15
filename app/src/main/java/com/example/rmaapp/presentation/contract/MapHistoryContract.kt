@@ -9,5 +9,8 @@ interface MapHistoryContract {
 
         fun findAll(): LiveData<List<SavedLocation>>
 
+        fun setMapReady()
+
+        fun isMapReady(): LiveData<Boolean>
     }
 }
