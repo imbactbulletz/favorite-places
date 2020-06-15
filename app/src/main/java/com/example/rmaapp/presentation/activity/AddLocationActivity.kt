@@ -7,7 +7,6 @@ import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -60,13 +59,14 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
             val locationTitle = locationTitleEditText.text.toString()
             val locationNote = locationNoteEditText.text.toString()
 
-            if (!locationTitle.isNullOrEmpty() && !locationNote.isNullOrEmpty()) {
+            if (locationTitle.isNotEmpty() && locationNote.isNotEmpty()) {
                 viewModel.save(SavedLocation(locationTitle, locationNote))
+                finish()
             } else {
-                if (locationTitle.isNullOrEmpty()) {
+                if (locationTitle.isEmpty()) {
                     locationTitleEditText.error = "Title cannot be empty"
                 }
-                if (locationNote.isNullOrEmpty()) {
+                if (locationNote.isEmpty()) {
                     locationNoteEditText.error = "Note cannot be empty"
                 }
             }

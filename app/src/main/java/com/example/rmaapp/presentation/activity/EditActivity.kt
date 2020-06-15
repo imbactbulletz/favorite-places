@@ -44,6 +44,7 @@ class EditActivity: AppCompatActivity(R.layout.activity_edit) {
 
             if(titleText.isNotEmpty() || noteText.isNotEmpty()) {
                 viewModel.edit(savedLocation.copy(title = titleText, note = noteText))
+                finish()
             } else {
                 if (titleText.isEmpty()) locationTitleEditText.error = "Title must not be empty"
                 if (noteText.isEmpty()) locationNoteEditText.error = "Note must not be empty"
