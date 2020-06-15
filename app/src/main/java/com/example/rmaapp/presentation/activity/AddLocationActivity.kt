@@ -10,6 +10,7 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.example.rmaapp.R
 import com.example.rmaapp.presentation.contract.AddLocationContract
 import com.example.rmaapp.presentation.model.SavedLocation
@@ -27,6 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_add_location.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import androidx.lifecycle.observe
 
 class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), OnMapReadyCallback {
 
@@ -60,8 +62,10 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
             val locationNote = locationNoteEditText.text.toString()
 
             if (locationTitle.isNotEmpty() && locationNote.isNotEmpty()) {
-                viewModel.save(SavedLocation(locationTitle, locationNote))
-                finish()
+                viewModel.getCurrentLocationPosition().observe(this) { position ->
+                    viewModel.save(SavedLocation(locationTitle, locationNote, position))
+                    finish()
+                }
             } else {
                 if (locationTitle.isEmpty()) {
                     locationTitleEditText.error = "Title cannot be empty"
@@ -82,6 +86,8 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
             SYDNEY_LAT,
             SYDNEY_LON
         )
+
+        viewModel.setCurrentLocationPosition(position)
 
         val marker = MarkerOptions()
             .position(position)
