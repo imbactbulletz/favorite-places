@@ -21,7 +21,7 @@ class RmaApplication: Application() {
     }
 
     private fun initKoin() {
-        val modules = listOf(coreModule, addLocationModule, trackHistoryModule, locationInfoModule, editModule)
+        val modules = listOf(coreModule, addLocationModule, trackHistoryModule, locationInfoModule, editModule, mapHistoryModule)
 
         startKoin {
             androidLogger(Level.DEBUG)
