@@ -80,7 +80,9 @@ class LocationListFragment : Fragment(R.layout.fragment_location_list) {
 
     private fun initObservers() {
         viewModel.getAllSavedLocations().observe(viewLifecycleOwner) { locations ->
-            recyclerAdapter.submitList(locations.sortedByDescending { it.dateCreated })
+            recyclerAdapter.submitList(locations.sortedByDescending { it.dateCreated }) {
+                locationRecyclerView.scrollToPosition(0)
+            }
         }
     }
 
