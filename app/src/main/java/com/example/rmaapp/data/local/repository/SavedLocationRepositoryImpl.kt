@@ -34,6 +34,10 @@ class SavedLocationRepositoryImpl(private val savedLocationDao: SavedLocationDao
         )
     }
 
+    override fun findById(id: Int): LiveData<SavedLocation> {
+        return savedLocationDao.findById(id).switchMap { MutableLiveData(SavedLocation(it.title, it.note, it.dateCreated, it.id)) }
+    }
+
     override fun findAll(): LiveData<List<SavedLocation>> {
         return savedLocationDao.findAll().switchMap { savedLocationEntities ->
             val backingLiveData = MutableLiveData<List<SavedLocation>>()

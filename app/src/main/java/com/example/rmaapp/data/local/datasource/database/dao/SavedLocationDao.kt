@@ -16,6 +16,9 @@ abstract class SavedLocationDao {
     @Update
     abstract fun edit(savedLocationEntity: SavedLocationEntity)
 
+    @Query("SELECT * FROM saved_location WHERE id = :id")
+    abstract fun findById(id: Int): LiveData<SavedLocationEntity>
+
     @Query("SELECT * FROM saved_location")
     abstract fun findAll(): LiveData<List<SavedLocationEntity>>
 }
