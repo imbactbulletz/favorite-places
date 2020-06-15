@@ -44,6 +44,7 @@ class MapHistoryFragment: SupportMapFragment() {
         viewModel.findAll().observe(viewLifecycleOwner) { savedLocations ->
             viewModel.isMapReady().observe(viewLifecycleOwner) { isMapReady ->
                 if (isMapReady) {
+                    clusterManager.clearItems()
                     clusterManager.addItems(savedLocations)
                 }
             }
