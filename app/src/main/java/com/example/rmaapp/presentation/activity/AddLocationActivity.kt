@@ -10,7 +10,6 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import com.example.rmaapp.R
 import com.example.rmaapp.presentation.contract.AddLocationContract
 import com.example.rmaapp.presentation.model.SavedLocation
@@ -39,6 +38,8 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
 
         private const val SYDNEY_LAT = -33.865143
         private const val SYDNEY_LON = 151.209900
+
+        private const val REQUEST_INTERVAL = 5000L
     }
 
     private var map: GoogleMap? = null
@@ -63,6 +64,8 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
 
             if (locationTitle.isNotEmpty() && locationNote.isNotEmpty()) {
                 viewModel.getCurrentLocationPosition().observe(this) { position ->
+                    // just in case - not to receive next value
+                    viewModel.getCurrentLocationPosition().removeObservers(this)
                     viewModel.save(SavedLocation(locationTitle, locationNote, position))
                     finish()
                 }
@@ -91,7 +94,6 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
 
         val marker = MarkerOptions()
             .position(position)
-
         map?.clear()
         map?.addMarker(marker)
         map?.animateCamera(CameraUpdateFactory.newLatLngZoom(position,
@@ -103,7 +105,7 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
     private fun requestLocation() {
         val locationRequest = LocationRequest.create()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = 5000L
+        locationRequest.interval = REQUEST_INTERVAL
         val locationCallback = object: LocationCallback() {
             override fun onLocationResult(result: LocationResult?) {
                 onLocationReceived(result?.lastLocation)
