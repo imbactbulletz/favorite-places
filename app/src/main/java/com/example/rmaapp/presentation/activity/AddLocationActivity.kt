@@ -2,6 +2,7 @@ package com.example.rmaapp.presentation.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
@@ -67,6 +68,7 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
                     // just in case - not to receive next value
                     viewModel.getCurrentLocationPosition().removeObservers(this)
                     viewModel.save(SavedLocation(locationTitle, locationNote, position))
+                    setResult(Activity.RESULT_OK)
                     finish()
                 }
             } else {
@@ -151,7 +153,10 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
         MaterialAlertDialogBuilder(this)
             .setTitle("Location permission necessary")
             .setMessage("In order to use this feature Location permission must be granted.")
-            .setNegativeButton("Don't grant") { _, _ -> finish() }
+            .setNegativeButton("Don't grant") { _, _ ->
+                setResult(Activity.RESULT_CANCELED)
+                finish()
+            }
             .setPositiveButton("Grant permission") { _, _ -> requestLocationPermission() }
             .show()
     }
@@ -160,7 +165,10 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
         MaterialAlertDialogBuilder(this)
             .setTitle("Feature not available")
             .setMessage("In order to use this feature you must go to Settings and manually enable Location permission for this application.")
-            .setPositiveButton("Okay") { _, _ -> finish() }
+            .setPositiveButton("Okay") { _, _ ->
+                setResult(Activity.RESULT_CANCELED)
+                finish()
+            }
             .show()
     }
 
@@ -168,7 +176,10 @@ class AddLocationActivity : AppCompatActivity(R.layout.activity_add_location), O
         MaterialAlertDialogBuilder(this)
             .setTitle("Discard entry")
             .setMessage("Are you sure you want to discard this entry?")
-            .setPositiveButton("Yes") { _, _ -> finish() }
+            .setPositiveButton("Yes") { _, _ ->
+                setResult(Activity.RESULT_CANCELED)
+                finish()
+            }
             .setNegativeButton("No", null)
             .show()
     }
