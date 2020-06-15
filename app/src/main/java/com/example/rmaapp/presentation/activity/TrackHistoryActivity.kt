@@ -17,6 +17,7 @@ class TrackHistoryActivity : AppCompatActivity(R.layout.activity_track_history) 
 
     private fun initViewPager() {
         viewPager.adapter = TrackHistoryViewPagerAdapter(this)
+        viewPager.isUserInputEnabled = false
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
