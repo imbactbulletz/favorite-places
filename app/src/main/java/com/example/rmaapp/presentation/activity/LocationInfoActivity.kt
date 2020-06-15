@@ -3,6 +3,7 @@ package com.example.rmaapp.presentation.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rmaapp.R
+import com.example.rmaapp.extension.toTimeStamp
 import com.example.rmaapp.presentation.model.SavedLocation
 import kotlinx.android.synthetic.main.activity_saved_location_info.*
 import java.lang.NullPointerException
@@ -30,7 +31,7 @@ class LocationInfoActivity: AppCompatActivity(R.layout.activity_saved_location_i
     private fun initViews() {
         titleTextView.text = savedLocation.title
         noteTextView.text = savedLocation.note
-        dateCreatedTextView.text = SimpleDateFormat("dd.MM.yyyy. HH:mm", Locale.getDefault()).format(savedLocation.dateCreated)
+        dateCreatedTextView.text = savedLocation.dateCreated.toTimeStamp()
     }
 
     companion object {

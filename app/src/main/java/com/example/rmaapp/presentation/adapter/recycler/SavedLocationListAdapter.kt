@@ -1,12 +1,10 @@
 package com.example.rmaapp.presentation.adapter.recycler
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.rmaapp.R
-import com.example.rmaapp.presentation.activity.LocationInfoActivity
 import com.example.rmaapp.presentation.adapter.recycler.viewholder.SavedLocationViewHolder
 import com.example.rmaapp.presentation.model.SavedLocation
 

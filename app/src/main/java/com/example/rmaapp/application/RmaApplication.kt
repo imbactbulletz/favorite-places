@@ -3,6 +3,7 @@ package com.example.rmaapp.application
 import android.app.Application
 import com.example.rmaapp.module.addLocationModule
 import com.example.rmaapp.module.coreModule
+import com.example.rmaapp.module.editModule
 import com.example.rmaapp.module.trackHistoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
@@ -23,7 +24,7 @@ class RmaApplication: Application() {
     }
 
     private fun initKoin() {
-        val modules = listOf(coreModule, addLocationModule, trackHistoryModule)
+        val modules = listOf(coreModule, addLocationModule, trackHistoryModule, editModule)
 
         startKoin {
             androidLogger(Level.DEBUG)
