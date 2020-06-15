@@ -1,5 +1,6 @@
 package com.example.rmaapp.presentation.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rmaapp.R
@@ -29,6 +30,19 @@ class LocationInfoActivity: AppCompatActivity(R.layout.activity_saved_location_i
     }
 
     private fun initViews() {
+        initButtonListeners()
+        displaySavedLocationInfo()
+    }
+
+    private fun initButtonListeners() {
+        editButton.setOnClickListener {
+            val intent = Intent(this, EditActivity::class.java)
+            intent.putExtra(EditActivity.SAVED_LOCATION_KEY, savedLocation)
+            startActivity(intent)
+        }
+    }
+
+    private fun displaySavedLocationInfo() {
         titleTextView.text = savedLocation.title
         noteTextView.text = savedLocation.note
         dateCreatedTextView.text = savedLocation.dateCreated.toTimeStamp()

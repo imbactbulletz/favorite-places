@@ -25,6 +25,7 @@
         <activity android:name="com.example.rmaapp.presentation.activity.AddLocationActivity" />
         <activity android:name="com.example.rmaapp.presentation.activity.TrackHistoryActivity"/>
         <activity android:name=".presentation.activity.LocationInfoActivity"/>
+        <activity android:name=".presentation.activity.EditActivity"/>
     </application>
 
 </manifest>

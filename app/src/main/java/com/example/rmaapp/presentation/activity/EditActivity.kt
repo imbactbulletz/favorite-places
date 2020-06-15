@@ -15,7 +15,7 @@ import java.lang.NullPointerException
 class EditActivity: AppCompatActivity(R.layout.activity_edit) {
 
     companion object {
-        private const val SAVED_LOCATION_KEY = "SAVED_LOCATION_KEY"
+        const val SAVED_LOCATION_KEY = "SAVED_LOCATION_KEY"
     }
 
     private lateinit var savedLocation: SavedLocation
@@ -60,6 +60,7 @@ class EditActivity: AppCompatActivity(R.layout.activity_edit) {
             .setNegativeButton("No", null)
             .show()
     }
+
     private fun displaySavedLocationInformation() {
         locationTitleEditText.setText(savedLocation.title)
         locationNoteEditText.setText(savedLocation.note)
