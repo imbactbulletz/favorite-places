@@ -11,11 +11,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_edit.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.lang.NullPointerException
-
+import androidx.lifecycle.observe
 class EditActivity: AppCompatActivity(R.layout.activity_edit) {
 
     companion object {
-        const val SAVED_LOCATION_KEY = "SAVED_LOCATION_KEY"
+        const val SAVED_LOCATION_ID_KEY = "SAVED_LOCATION_KEY"
     }
 
     private lateinit var savedLocation: SavedLocation
@@ -31,7 +31,6 @@ class EditActivity: AppCompatActivity(R.layout.activity_edit) {
 
     private fun initViews() {
         initButtonListeners()
-        displaySavedLocationInformation()
     }
 
     private fun initButtonListeners() {
@@ -68,8 +67,13 @@ class EditActivity: AppCompatActivity(R.layout.activity_edit) {
     }
 
     private fun getSavedLocation() {
-        val passedSavedLocation: SavedLocation? = intent.getParcelableExtra(SAVED_LOCATION_KEY)
-        if(passedSavedLocation != null) savedLocation = passedSavedLocation
+        val passedSavedLocationId: Int? = intent.getIntExtra(SAVED_LOCATION_ID_KEY, -1)
+        if(passedSavedLocationId != null && passedSavedLocationId != -1) {
+            viewModel.findById(passedSavedLocationId).observe(this) {
+                savedLocation = it
+                displaySavedLocationInformation()
+            }
+        }
         else throw NullPointerException("Saved location must be passed as a parameter.")
     }
 }

@@ -41,7 +41,7 @@ class LocationListFragment : Fragment(R.layout.fragment_location_list) {
 
     private fun startLocationInfoActivity(savedLocation: SavedLocation) {
         val intent = Intent(activity, LocationInfoActivity::class.java)
-        intent.putExtra(LocationInfoActivity.SAVED_LOCATION_KEY, savedLocation)
+        intent.putExtra(LocationInfoActivity.SAVED_LOCATION_ID_KEY, savedLocation.id)
         startActivity(intent)
     }
 }
