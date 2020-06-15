@@ -1,5 +1,6 @@
 package com.example.rmaapp.presentation.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -12,11 +13,14 @@ import kotlinx.android.synthetic.main.activity_saved_location_info.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.lang.NullPointerException
 import androidx.lifecycle.observe
+import com.google.android.material.snackbar.Snackbar
 
 class LocationInfoActivity: AppCompatActivity(R.layout.activity_saved_location_info) {
 
     companion object {
         const val SAVED_LOCATION_ID_KEY = "SAVED_LOCATION_KEY"
+
+        const val DUMMY_REQUEST_CODE = 0
     }
 
     lateinit var savedLocation: SavedLocation
@@ -55,7 +59,21 @@ class LocationInfoActivity: AppCompatActivity(R.layout.activity_saved_location_i
         editButton.setOnClickListener {
             val intent = Intent(this, EditActivity::class.java)
             intent.putExtra(EditActivity.SAVED_LOCATION_ID_KEY, savedLocation.id)
-            startActivity(intent)
+            startActivityForResult(intent, DUMMY_REQUEST_CODE)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(resultCode == Activity.RESULT_OK) {
+            showSnackbar("Changes applied successfully!")
+        }
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(window.decorView.rootView, message, Snackbar.LENGTH_LONG)
+            .setAction("Close", null)
+            .show()
     }
 }

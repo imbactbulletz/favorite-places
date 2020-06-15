@@ -1,5 +1,6 @@
 package com.example.rmaapp.presentation.activity
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rmaapp.R
@@ -44,6 +45,7 @@ class EditActivity: AppCompatActivity(R.layout.activity_edit) {
 
             if(titleText.isNotEmpty() || noteText.isNotEmpty()) {
                 viewModel.edit(savedLocation.copy(title = titleText, note = noteText))
+                setResult(Activity.RESULT_OK)
                 finish()
             } else {
                 if (titleText.isEmpty()) locationTitleEditText.error = "Title must not be empty"
