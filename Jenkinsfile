@@ -36,10 +36,13 @@ pipeline {
                 script { CURRENT_PENDING_STAGE = STAGE_NAME }
                 notifyGithub(CURRENT_PENDING_STAGE, 'In progress..','PENDING')
 
-                echo 'Inspecting code..'
+                echo 'Performing Android lint..'
                 sh './gradlew lint'
 
-                recordIssues enabledForFailure: true, tool: androidLintParser(pattern: "**/lint-results.xml"), qualityGates: [[threshold:1, type: 'TOTAL', unstable: false]]
+                echo 'Performing Code Style lint'
+                sh './gradlew ktlint'
+
+                recordIssues enabledForFailure: true, tools: [androidLintParser(pattern: "**/lint-results.xml"), ktlint(pattern: "**/reports/ktlint/*.exe")], qualityGates: [[threshold:1, type: 'TOTAL', unstable: false]]
                 notifyGithub(CURRENT_PENDING_STAGE,'Passed!','SUCCESS')
             }
         }
