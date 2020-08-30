@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">@color/colorDarkerYellow</color>
     <color name="colorAccent">@color/colorBlack</color>
 
-    <color name="colorYellow">#FFCC43</color>
+    <color name="colorYellow">#FFCC44</color>
     <color name="colorDarkerYellow">#B38E2C</color>
     <color name="colorRed">#FB4848</color>
     <color name="colorGreen">#71CD00</color>
