@@ -42,7 +42,7 @@ pipeline {
                 echo 'Performing Code Style lint'
                 sh './gradlew ktlint'
 
-                recordIssues enabledForFailure: true, tools: [androidLintParser(pattern: "**/lint-results.xml"), ktlint(pattern: "**/reports/ktlint/*.exe")], qualityGates: [[threshold:1, type: 'TOTAL', unstable: false]]
+                recordIssues enabledForFailure: true, tools: [androidLintParser(pattern: "**/lint-results.xml"), ktlint(pattern: "**/reports/ktlint/*.xml")], qualityGates: [[threshold:1, type: 'TOTAL', unstable: false]]
                 notifyGithub(CURRENT_PENDING_STAGE,'Passed!','SUCCESS')
             }
         }
