@@ -36,9 +36,6 @@ pipeline {
                 script { CURRENT_PENDING_STAGE = STAGE_NAME }
                 notifyGithub(CURRENT_PENDING_STAGE, 'In progress..','PENDING')
 
-                echo 'Performing Android lint..'
-                sh './gradlew lint'
-
                 echo 'Performing Code Style lint'
                 sh './gradlew ktlint'
 
